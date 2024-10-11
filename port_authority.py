@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Script Name: port_authority.py
-Version: 0.2
+Version: 0.3
 Date: 10/08/2024
 Author: A.R.
 Purpose: This script queries running processes and their network connections, including protocol details,
@@ -20,7 +20,8 @@ import logging
 import os
 
 # Set up logging
-log_filename = os.path.join(os.path.dirname(__file__), 'zero_noise.log')
+script_dir = os.path.dirname(os.path.abspath(__file__))
+log_filename = os.path.join(script_dir, 'zero_noise.log')
 logging.basicConfig(filename=log_filename, level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def query_osquery(sql):
