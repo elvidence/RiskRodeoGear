@@ -20,10 +20,10 @@ providing insights that are crucial for cybersecurity investigations.
      
 - Administrative Privileges: Running this script may require administrative privileges, especially to access
   detailed process and network information:
-  * On Linux or macOS, run the script with 'sudo python3 zero_noise.py'.
+  * On Linux or macOS, run the script with 'sudo python3 port_authority.py.
   * On Windows, run your command prompt as an Administrator and execute the script.
 
 - This script utilises built-in subprocess to run osquery commands, hence no additional Python libraries are required for its execution. 
   Simply ensure you have Python 3 installed.
 
-- Run the script with Python 3 by using the command 'python3 zero_noise.py'.
+- Run the script with Python 3 by using the command 'python3 port_authority.py.
