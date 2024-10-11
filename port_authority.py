@@ -9,7 +9,10 @@ Purpose: This script queries running processes and their network connections con
          real-time cybersecurity monitoring and identifying potentially malicious activity.
 
 Details: The script leverages osquery to fetch details about processes communicating over the network,
-         providing insights that are crucial for cybersecurity investigations.
+         providing insights that are crucial for cybersecurity investigations. It runs with command-line arguments
+         allowing the user to specify the monitoring duration in seconds ('s') or minutes ('m'). For example,
+         to run the script for 10 minutes, use the command: 'sudo python port_authority.py -t 10m'. To run it for 30 seconds,
+         use 'sudo python port_authority.py -t 30s'.
 
 Setup: Ensure osquery is installed and accessible in the system's PATH. Run this script with Python 3.
 """
