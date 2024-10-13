@@ -121,7 +121,16 @@ Future Optimisation Plans - The script will be enhanced to calculate Sample Entr
   - *Sample Entropy Alone* - Simpler computation but potentially less informative.
   - *With Shingling* - More computationally intensive due to increased data complexity but provides richer information.
 
+### Running the Script
 
+To run the script with Python 3, use the following command:
+
+```bash
+python3 1984detector.py /usr/bin/ 5
+```
+
+- `/usr/bin/` specifies the directory to scan.
+- `5` sets the shingle size.
 
 
 
