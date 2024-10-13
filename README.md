@@ -43,9 +43,8 @@ Future Optimisation Plans - The script will be enhanced to calculate Sample Entr
 - Sample Entropy (SampEn) is a statistical measure that quantifies the regularity or complexity within a time series or sequence.
 - It assesses the likelihood that patterns of data that are similar for a certain length \( m \) remain similar at the next point \( m + 1 \).
 - Mathematically, it's defined as:  
-  \[
-  \text{Sample Entropy} = -\ln\left(\frac{\text{Number of matching sequences of length } m+1}{\text{Number of matching sequences of length } m}\right)
-  \]
+  `Sample Entropy = -ln(Number of matching sequences of length m+1 / Number of matching sequences of length m)`
+
 
 ### Parameters
 - **m**: Length of the sequences to compare.
