@@ -18,15 +18,15 @@ providing insights that are crucial for cybersecurity investigations.
      export PATH=$PATH:/path/to/osquery/bin
      Replace '/path/to/osquery/bin' with the actual path where osquery is installed.
      
-- Administrative Privileges: Running this script may require administrative privileges, especially to access
+ - Administrative Privileges: Running this script may require administrative privileges, especially to access
   detailed process and network information:
   * On Linux or macOS, run the script with 'sudo python3 port_authority.py.
   * On Windows, run your command prompt as an Administrator and execute the script.
 
-- This script utilises built-in subprocess to run osquery commands, hence no additional Python libraries are required for its execution. 
+ - This script utilises built-in subprocess to run osquery commands, hence no additional Python libraries are required for its execution. 
   Simply ensure you have Python 3 installed.
 
-- Run the script with Python 3 by using the command 'python3 port_authority.py.
+ - Run the script with Python 3 by using the command 'python3 port_authority.py.
 ------------------
 ## 1984detector.py
 This script is an entropy tester designed to detect hidden malware in benign files. It combines Sample Entropy with Shingling to identify potential threats.
@@ -65,8 +65,8 @@ Future Optimisation Plans - The script will be enhanced to calculate Sample Entr
   - \([c, d, e]\)
 
 ### Purpose of Shingling
-- **Captures Local Patterns**: By focusing on sequences of elements, shingling preserves the local structure and patterns within the data.
-- **Reduces Dimensionality**: It condenses the data into meaningful units for analysis.
+- **Captures Local Patterns** - By focusing on sequences of elements, shingling preserves the local structure and patterns within the data.
+- **Reduces Dimensionality** - It condenses the data into meaningful units for analysis.
 
 # Combining Sample Entropy with Shingling
 
@@ -81,30 +81,30 @@ Future Optimisation Plans - The script will be enhanced to calculate Sample Entr
 ## Benefits Over Using Sample Entropy Alone
 
 ### Enhanced Local Pattern Detection
-- **Local Context**- Shingling preserves the order and relationships between data points within each shingle.
-- **Subtle Anomalies**- Anomalies that affect specific regions or sequences in the data are more likely to be detected.
-  - *Example*- In file analysis, malicious code may alter certain sequences of bytes. Shingling helps in detecting these local changes.
+- **Local Context** - Shingling preserves the order and relationships between data points within each shingle.
+- **Subtle Anomalies** - Anomalies that affect specific regions or sequences in the data are more likely to be detected.
+  - *Example* - In file analysis, malicious code may alter certain sequences of bytes. Shingling helps in detecting these local changes.
 
 ### Improved Sensitivity to Structural Changes
-- **Pattern Complexity**- By analysing sequences of elements, the method becomes sensitive to changes in the structural complexity of the data.
-- **Sequence-Level Analysis**- Sample Entropy with Shingling can detect disruptions in the expected sequence patterns.
+- **Pattern Complexity** - By analysing sequences of elements, the method becomes sensitive to changes in the structural complexity of the data.
+- **Sequence-Level Analysis** - Sample Entropy with Shingling can detect disruptions in the expected sequence patterns.
 
 ### Noise Reduction
-- **Smoothing Effect**- Shingling can mitigate the impact of random noise by focusing on larger patterns rather than individual data points.
-- **Consistent Patterns**- It emphasises consistent patterns over isolated anomalies.
+- **Smoothing Effect** - Shingling can mitigate the impact of random noise by focusing on larger patterns rather than individual data points.
+- **Consistent Patterns** - It emphasises consistent patterns over isolated anomalies.
 
 ### Flexibility in Analysis
-- **Adjustable Granularity**- The shingle size \( k \) can be adjusted to capture different levels of detail.
-- **Customizable Parameters**- Allows for tuning \( k \), \( m \), and \( r \) to suit the specific characteristics of the data and the anomalies being targeted.
+- **Adjustable Granularity** - The shingle size \( k \) can be adjusted to capture different levels of detail.
+- **Customizable Parameters** - Allows for tuning \( k \), \( m \), and \( r \) to suit the specific characteristics of the data and the anomalies being targeted.
 
 ### Computational Efficiency
-- **Reduced Complexity per Element**- Working with shingles can reduce the number of elements compared to the raw data, especially if \( k \) is large relative to the data size.
-- **Parallel Processing Opportunities**- Shingled data can be more amenable to parallel processing techniques.
+- **Reduced Complexity per Element** - Working with shingles can reduce the number of elements compared to the raw data, especially if \( k \) is large relative to the data size.
+- **Parallel Processing Opportunities** - Shingled data can be more amenable to parallel processing techniques.
 
 ## Limitations of Using Sample Entropy Alone
-- **Lack of Contextual Information**- Without shingling, Sample Entropy analyses individual data points or minimal sequences, potentially missing patterns that emerge over longer sequences.
-- **Sensitivity to Data Length**- In raw data, short sequences may not capture the complexity needed for meaningful entropy calculations.
-- **Ineffective for Complex Structures**- For data with inherent sequence structures (like text or code), Sample Entropy alone may not effectively capture important patterns.
+- **Lack of Contextual Information** - Without shingling, Sample Entropy analyses individual data points or minimal sequences, potentially missing patterns that emerge over longer sequences.
+- **Sensitivity to Data Length** - In raw data, short sequences may not capture the complexity needed for meaningful entropy calculations.
+- **Ineffective for Complex Structures** - For data with inherent sequence structures (like text or code), Sample Entropy alone may not effectively capture important patterns.
 
 # Practical Implications
 
@@ -113,13 +113,13 @@ Future Optimisation Plans - The script will be enhanced to calculate Sample Entr
   - May detect overall randomness or regularity but could miss localised anomalies.
   - Less effective at detecting inserted code or data that affects specific sequences.
 - **Sample Entropy with Shingling**:
-  - **Detects Localised Changes**- Better at identifying anomalies that affect specific sequences within the file.
-  - **Identifies Structural Alterations**- More sensitive to changes in the order and structure of data points.
+  - **Detects Localised Changes** - Better at identifying anomalies that affect specific sequences within the file.
+  - **Identifies Structural Alterations** - More sensitive to changes in the order and structure of data points.
 
 ## Performance Considerations
 - **Trade-off**:
-  - *Sample Entropy Alone*- Simpler computation but potentially less informative.
-  - *With Shingling*- More computationally intensive due to increased data complexity but provides richer information.
+  - *Sample Entropy Alone* - Simpler computation but potentially less informative.
+  - *With Shingling* - More computationally intensive due to increased data complexity but provides richer information.
 
 
 
