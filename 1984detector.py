@@ -2,7 +2,7 @@
 
 """
 Author: A.R.
-Version: 0.001b Raw Beta ;-)
+Version: 0.002b Raw Beta ;-)
 Date: 13 October 2024
 License: MIT
 """
