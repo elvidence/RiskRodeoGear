@@ -14,30 +14,99 @@ from concurrent.futures import ProcessPoolExecutor
 
 # Define file signatures for known file types
 FILE_SIGNATURES = {
-    '.exe': [b'MZ'],
-    '.dll': [b'MZ'],
-    '.jpg': [b'\xFF\xD8\xFF'],
-    '.png': [b'\x89PNG\r\n\x1a\n'],
-    '.pdf': [b'%PDF'],
-    '.zip': [b'PK\x03\x04'],
-    '.txt': [],  # Text files usually don't have a signature
-    '.tar': [b'ustar'],  # POSIX tar archives
-    '.gz': [b'\x1F\x8B'],  # GZIP files
-    '.bz2': [b'BZh'],  # BZIP2 files
-    '.7z': [b'7z\xBC\xAF\x27\x1C'],  # 7z files
-    '.mp3': [b'ID3'],  # MP3 files with ID3v2 header
-    '.mp4': [b'\x00\x00\x00\x18ftypmp42'],  # MP4/M4A files
-    '.iso': [b'CD001'],  # ISO image files
-    '.dmg': [b'koly'],  # Apple Disk Image files
-    '.sqlite': [b'SQLite format 3\x00'],  # SQLite database file
-    '.deb': [b'!<arch>\ndebian-binary'],  # Debian package files
-    '.rpm': [b'\xed\xab\xee\xdb'],  # RPM package files
-    '.sh': [],  # Shell script files
-    '.py': [],  # Python script files
-    '.js': [],  # JavaScript files
-    '.html': [b'<!DOCTYPE HTML'],  # HTML files
-    '.xml': [b'<?xml version="1.0"'],  # XML files
-    # Add more signatures as needed
+    '.exe': [b'MZ'],  # Windows executable
+    '.dll': [b'MZ'],  # Windows DLL
+    '.jpg': [b'\xFF\xD8\xFF'],  # JPEG image
+    '.jpeg': [b'\xFF\xD8\xFF'],  # JPEG image
+    '.png': [b'\x89PNG\r\n\x1a\n'],  # PNG image
+    '.pdf': [b'%PDF'],  # PDF document
+    '.zip': [b'PK\x03\x04'],  # ZIP archive
+    '.tar': [b'ustar'],  # TAR archive
+    '.gz': [b'\x1F\x8B'],  # GZIP
+    '.bz2': [b'BZh'],  # BZIP2
+    '.7z': [b'7z\xBC\xAF\x27\x1C'],  # 7z archive
+    '.rar': [b'Rar!\x1A\x07\x00'],  # RAR archive
+    '.mp3': [b'ID3'],  # MP3 audio
+    '.mp4': [b'\x00\x00\x00\x18ftypmp42'],  # MP4 video
+    '.iso': [b'CD001'],  # ISO disk image
+    '.dmg': [b'koly'],  # Apple Disk Image
+    '.sqlite': [b'SQLite format 3\x00'],  # SQLite database
+    '.deb': [b'!<arch>\ndebian-binary'],  # Debian package
+    '.rpm': [b'\xed\xab\xee\xdb'],  # RPM package
+    '.ps': [b'%!PS'],  # PostScript
+    '.psd': [b'8BPS'],  # Adobe Photoshop
+    '.flv': [b'FLV\x01'],  # Flash Video
+    '.swf': [b'CWS', b'FWS'],  # Shockwave Flash
+    '.midi': [b'MThd'],  # MIDI
+    '.mov': [b'\x00\x00\x00\x14ftypqt'],  # QuickTime MOV
+    '.avi': [b'RIFF'],  # AVI video
+    '.bmp': [b'BM'],  # Bitmap image
+    '.gif': [b'GIF87a', b'GIF89a'],  # GIF image
+    '.wav': [b'RIFF'],  # WAV audio
+    '.ogg': [b'OggS'],  # OGG audio
+    '.flac': [b'fLaC'],  # FLAC audio
+    '.mkv': [b'\x1A\x45\xDF\xA3'],  # Matroska video
+    '.epub': [b'PK\x03\x04'],  # ePub
+    '.jar': [b'PK\x03\x04'],  # Java Archive
+    '.class': [b'\xCA\xFE\xBA\xBE'],  # Java Class
+    '.apk': [b'PK\x03\x04'],  # Android package
+    '.crx': [b'Cr24'],  # Chrome extension
+    '.vmdk': [b'KDMV'],  # VMware virtual disk
+    '.vhd': [b'conectix'],  # Virtual Hard Disk
+    '.pem': [b'-----BEGIN '],  # PEM certificates
+    '.der': [b'\x30\x82'],  # DER certificate
+    '.pfx': [b'\x30\x82'],  # PKCS#12 certificate
+    '.crt': [b'-----BEGIN CERTIFICATE-----'],  # PEM certificate
+    '.csr': [b'-----BEGIN CERTIFICATE REQUEST-----'],  # Certificate request
+    '.xz': [b'\xFD7zXZ\x00'],  # XZ compressed
+    '.zst': [b'\x28\xB5\x2F\xFD'],  # Zstandard compressed
+    '.vcf': [b'BEGIN:VCARD'],  # vCard
+    '.pcap': [b'\xD4\xC3\xB2\xA1'],  # Packet capture
+    '.bat': [b'@echo'],  # Batch file
+    '.ics': [b'BEGIN:VCALENDAR'],  # Calendar file
+    '.m3u': [b'#EXTM3U'],  # Playlist file
+    '.cab': [b'MSCF'],  # Microsoft Cabinet
+    '.asf': [b'\x30\x26\xB2\x75\x8E\x66\xCF\x11\xA6\xD9\x00\xAA\x00\x62\xCE\x6C'],  # ASF/WMV
+    '.wav': [b'RIFF', b'WAVE'],  # WAV audio
+    '.tar.gz': [b'\x1F\x8B'],  # Compressed tar
+    '.pkg': [b'\x1F\xA0'],  # Package format (varies)
+    '.svg': [b'<?xml '],  # Scalable Vector Graphics
+    '.eps': [b'%!PS-Adobe'],  # Encapsulated PostScript
+    '.m4a': [b'\x00\x00\x00\x18ftypM4A'],  # M4A audio
+    '.crt': [b'-----BEGIN CERTIFICATE-----'],  # X.509 cert
+    '.p12': [b'\x30\x82'],  # PKCS#12 cert
+    '.dll': [b'MZ'],  # Dynamic Link Library
+    '.elf': [b'\x7FELF'],  # ELF executable
+    '.ico': [b'\x00\x00\x01\x00'],  # Icon file
+    '.qbw': [b'\x00\x00\x00\x00\x00\x00\x01\x00\x4D\x44\x4D\x50'],  # QuickBooks
+    '.vcxproj': [b'<?xml'],  # Visual Studio project
+    '.vsd': [b'\xD0\xCF\x11\xE0\xA1\xB1\x1A\xE1'],  # Visio document
+    '.mdb': [b'\x00\x01\x00\x00Standard Jet DB'],  # Access DB
+    '.pub': [b'\x30\x82'],  # Public key (DER)
+    '.ova': [b'\x4F\x56\x46\x09\x00\x00\x00\x00'],  # Open Virtual Appliance
+    '.vdi': [b'\x3C\x3F\x78\x6D\x6C'],  # VirtualBox disk image
+    '.vhdx': [b'\x76\x68\x64\x78\x62\x64\x66'],  # Hyper-V VHDX
+    '.inf': [b'[Version]'],  # Installation info file
+    '.hlp': [b'0x0F1F'],  # Windows help file
+    '.cfg': [b'\x3C\x3F\x78\x6D\x6C'],  # Config file (XML-based)
+    '.iso': [b'\x43\x44\x30\x30\x31'],  # ISO 9660 CD
+    '.bz': [b'\x42\x5A\x68'],  # BZip archive
+    '.pak': [b'\x55\x4E\x52\x45\x41\x4C'],  # Packed file
+    '.arj': [b'\x60\xEA'],  # ARJ archive
+    '.ace': [b'\x2A\x2A\x41\x43\x45\x2A\x2A'],  # ACE archive
+    '.bin': [b'\xCA\xFE\xBA\xBE'],  # Binary
+    '.mac': [b'\x00\x00\x00\x0C\x4D\x41\x43\x20\x54\x49\x4D\x45'],  # Macintosh format
+    '.dylib': [b'\xCF\xFA\xED\xFE'],  # Mac OS library
+    '.jnlp': [b'<?xml version="1.0'],  # Java Network Launch
+    '.m4v': [b'\x00\x00\x00\x18ftypM4V'],  # iTunes video
+    '.m2ts': [b'\x47'],  # MPEG transport stream
+    '.ts': [b'\x47'],  # MPEG transport stream
+    '.cda': [b'\x43\x44\x30\x30\x31'],  # CD Audio
+    '.ram': [b'\x2E\x52\x4D\x46\x00\x00\x00'],  # Real Audio
+    '.ra': [b'\x2E\x52\x4D\x46'],  # Real Audio
+    '.rv': [b'\x2E\x52\x4D\x46'],  # Real Video
+    '.pdb': [b'Microsoft C/C++ MSF'],  # Program Database
+    '.lnk': [b'\x4C\x00\x00\x00'],  # Shortcut file
 }
 
 def scan_files(directory):
