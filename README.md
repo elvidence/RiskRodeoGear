@@ -132,6 +132,11 @@ python3 1984detector.py /usr/bin/ 5
 - `/usr/bin/` specifies the directory to scan.
 - `5` sets the shingle size.
 
+## eventIDs.md
+This table highlights the 20 most common Event IDs essential for cybersecurity investigations and threat hunting. It is important to note that these Event IDs are not globally unique across different Windows Event Log sources; they are only unique within the same log source. Therefore, when monitoring or troubleshooting, it is crucial to consider both the Event ID and its source log to accurately understand the context of the event.
+
+
+
 
 
 
