@@ -28,7 +28,6 @@ FILE_SIGNATURES = {
     '.rar': [b'Rar!\x1A\x07\x00'],  # RAR archive
     '.mp3': [b'ID3'],  # MP3 audio
     '.mp4': [b'\x00\x00\x00\x18ftypmp42'],  # MP4 video
-    '.iso': [b'CD001'],  # ISO disk image
     '.dmg': [b'koly'],  # Apple Disk Image
     '.sqlite': [b'SQLite format 3\x00'],  # SQLite database
     '.deb': [b'!<arch>\ndebian-binary'],  # Debian package
@@ -42,7 +41,6 @@ FILE_SIGNATURES = {
     '.avi': [b'RIFF'],  # AVI video
     '.bmp': [b'BM'],  # Bitmap image
     '.gif': [b'GIF87a', b'GIF89a'],  # GIF image
-    '.wav': [b'RIFF'],  # WAV audio
     '.ogg': [b'OggS'],  # OGG audio
     '.flac': [b'fLaC'],  # FLAC audio
     '.mkv': [b'\x1A\x45\xDF\xA3'],  # Matroska video
@@ -56,7 +54,6 @@ FILE_SIGNATURES = {
     '.pem': [b'-----BEGIN '],  # PEM certificates
     '.der': [b'\x30\x82'],  # DER certificate
     '.pfx': [b'\x30\x82'],  # PKCS#12 certificate
-    '.crt': [b'-----BEGIN CERTIFICATE-----'],  # PEM certificate
     '.csr': [b'-----BEGIN CERTIFICATE REQUEST-----'],  # Certificate request
     '.xz': [b'\xFD7zXZ\x00'],  # XZ compressed
     '.zst': [b'\x28\xB5\x2F\xFD'],  # Zstandard compressed
@@ -75,7 +72,6 @@ FILE_SIGNATURES = {
     '.m4a': [b'\x00\x00\x00\x18ftypM4A'],  # M4A audio
     '.crt': [b'-----BEGIN CERTIFICATE-----'],  # X.509 cert
     '.p12': [b'\x30\x82'],  # PKCS#12 cert
-    '.dll': [b'MZ'],  # Dynamic Link Library
     '.elf': [b'\x7FELF'],  # ELF executable
     '.ico': [b'\x00\x00\x01\x00'],  # Icon file
     '.qbw': [b'\x00\x00\x00\x00\x00\x00\x01\x00\x4D\x44\x4D\x50'],  # QuickBooks
@@ -108,7 +104,6 @@ FILE_SIGNATURES = {
     '.pdb': [b'Microsoft C/C++ MSF'],  # Program Database
     '.lnk': [b'\x4C\x00\x00\x00'],  # Shortcut file
 }
-
 def scan_files(directory):
     """Recursively scan the directory and return a list of file paths."""
     file_paths = []
