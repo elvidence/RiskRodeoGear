@@ -26,7 +26,10 @@ providing insights that are crucial for cybersecurity investigations.
  - This script utilises built-in subprocess to run osquery commands, hence no additional Python libraries are required for its execution. 
   Simply ensure you have Python 3 installed.
 
- - Run the script with Python 3 by using the command 'python3 port_authority.py.
+ - Run the script with Python 3 by using the command 'python3 port_authority.py. It runs with command-line arguments
+         allowing the user to specify the monitoring duration in seconds ('s') or minutes ('m'). For example,
+         to run the script for 10 minutes, use the command: 'sudo python port_authority.py -t 10m'. To run it for 30 seconds,
+         use 'sudo python port_authority.py -t 30s'.
 ------------------
 ## 1984detector.py
 This script is an entropy tester designed to detect hidden malware in benign files. It combines Sample Entropy with Shingling to identify potential threats.
